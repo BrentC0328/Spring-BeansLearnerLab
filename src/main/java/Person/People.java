@@ -38,4 +38,9 @@ public abstract class People<PersonType extends Person> implements Iterable<Pers
         }
         return null;
     }
+
+    public List<PersonType> findAll(){
+        return personList;
+    }
+
 }
