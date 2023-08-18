@@ -1,30 +1,32 @@
 package Config;
 
 import Person.Classroom;
-import Person.Instructor;
 import Person.Instructors;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.DependsOn;
 
 @Configuration
 public class ClassroomConfig {
 
+    private final Instructors instructors;
+    private final StudentsConfig studentsConfig;
 
-
-    @Bean
-    @DependsOn({"instructors", "students"})
-    public Classroom currentCohort(){
-        StudentsConfig studentsConfig = new StudentsConfig();
-        InstructorsConfig instructorsConfig = new InstructorsConfig();
-        return new Classroom(instructorsConfig.instructors(), studentsConfig.currentStudents());
+    @Autowired
+    public ClassroomConfig(Instructors instructors, StudentsConfig studentsConfig) {
+        this.instructors = instructors;
+        this.studentsConfig = studentsConfig;
     }
 
     @Bean
-    @DependsOn({"instructors", "students"})
-    public Classroom previousCohort(){
-        StudentsConfig studentsConfig = new StudentsConfig();
-        InstructorsConfig instructorsConfig = new InstructorsConfig();
-        return new Classroom(instructorsConfig.instructors(), studentsConfig.previousStudents());
+    public Classroom currentCohort() {
+        return new Classroom(instructors, studentsConfig.previousStudents());
     }
+
+    @Bean
+    public Classroom previousCohort() {
+        return new Classroom(instructors, studentsConfig.previousStudents());
+    }
+
+
 }
