@@ -23,7 +23,7 @@ public class ClassroomConfig {
         return new Classroom(instructors, studentsConfig.previousStudents());
     }
 
-    @Bean
+    @Bean (name = "previousCohort")
     public Classroom previousCohort() {
         return new Classroom(instructors, studentsConfig.previousStudents());
     }

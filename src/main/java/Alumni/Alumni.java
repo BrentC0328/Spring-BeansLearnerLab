@@ -1,9 +1,11 @@
 package Alumni;
 
 import Config.ClassroomConfig;
+import Person.Classroom;
 import Person.Instructors;
 import Person.Students;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
@@ -15,7 +17,9 @@ public class Alumni {
     private Instructors instructors;
 
     @Autowired
-    public Alumni() {
+    public Alumni(@Qualifier ("previousCohort") Classroom classroom) {
+        this.students = classroom.getStudents();
+        this.instructors = classroom.getInstructors();
 
     }
 
@@ -26,8 +30,5 @@ public class Alumni {
     public Students getStudents() {
         return students;
     }
-    @Bean
-    public void exectuteBootcamp(){
-        for (Student student : currentCohort())
-    }
+
 }
