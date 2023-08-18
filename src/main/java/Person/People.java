@@ -1,5 +1,6 @@
 package Person;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class People<PersonType extends Person> implements Iterable<PersonType>{
@@ -10,6 +11,10 @@ public abstract class People<PersonType extends Person> implements Iterable<Pers
         this.personList = personList;
     }
 
+    public People(PersonType...persons){
+        this.personList = new ArrayList<>(List.of(persons));
+    }
+
     public void add(PersonType person){
         this.personList.add(person);
     }
@@ -17,11 +22,11 @@ public abstract class People<PersonType extends Person> implements Iterable<Pers
     public void remove(PersonType person){
         this.personList.remove(person);
     }
-    public int size(List<PersonType> personList){
+    public int size(){
         return personList.size();
     }
 
-    public void clear(List<PersonType> personList){
+    public void clear(){
         personList.clear();
     }
 
@@ -42,5 +47,7 @@ public abstract class People<PersonType extends Person> implements Iterable<Pers
     public List<PersonType> findAll(){
         return personList;
     }
+
+
 
 }

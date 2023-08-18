@@ -4,8 +4,8 @@ import java.util.Iterator;
 import java.util.List;
 
 public class Instructors extends People<Instructor> {
-    public Instructors(List<Instructor> instructorList){
-        super(instructorList);
+    public Instructors(Instructor... instructors){
+        super(instructors);
     }
 
     @Override
